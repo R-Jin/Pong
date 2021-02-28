@@ -97,11 +97,23 @@ function animate(){
     var distanceDown = canvas.height-ballY; 
 
     if (distanceUp <= ballR || distanceDown <= ballR) {
+        if (distanceUp < ballR) {
+            ballY = ballR;
+        }
+        if (distanceDown < ballR) {
+            ballY = canvas.height - ballR;
+        }
         ballVY = ballVY * -1;
     }
+    if (ballX - ballR  <= player1.x + player1.w && ballX - ballR >= player1.x && ballY >= player1.y && ballY <= player1.y + player1.h || ballX + ballR >= player2.x && ballX - ballR <= player2.x + player2.w && ballY >= player2.y && ballY <= player2.y + player2.h ) {
+        if (ballX - ballR  < player1.x + player1.w && ballX - ballR > player1.x) {
+            ballX = player1.x + player1.w + ballR
+        } 
 
-    if (ballX - ballR <= player1.x + player1.w && ballX - ballR >= player1.x && ballY >= player1.y && ballY <= player1.y + player1.h || ballX + ballR >= player2.x && ballX - ballR <= player2.x + player2.w && ballY >= player2.y && ballY <= player2.y + player2.h ) {
-        ballVX = ballVX * -1 + Math.floor(Math.random() * 200) + -200;
+        if (ballX + ballR > player2.x && ballX - ballR < player2.x + player2.w ) {
+            ballX = player2.x - ballR
+        } 
+        ballVX = ballVX * -1;
         ballVY += Math.floor(Math.random() * 200) - 100;
     }
     
